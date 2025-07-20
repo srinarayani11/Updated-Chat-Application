@@ -1,0 +1,115 @@
+.register-container {
+    min-height: 100vh;
+    height: 100vh;
+    width: 100vw;
+    background-color: #020d34;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    font-family: 'Segoe UI', sans-serif;
+    padding: 20px;
+}
+
+.register-form {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 5px;
+    padding: 10px 30px;
+    width: 400px;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(0, 191, 255, 0.4);
+    color: #ffffff;
+    margin: 40px 0; 
+}
+
+.register-title {
+    font-size: 36px;
+    color: #00bfff;
+    margin-bottom: 25px;
+}
+
+.register-form label {
+    display: block;
+    text-align: left;
+    font-weight: bold;
+    margin: 10px 0 5px;
+    color: #ffffff;
+}
+
+.register-form input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #00bfff;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    font-size: 16px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+.register-form input::placeholder {
+    color: #99ccff;
+}
+
+.register-form button {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(90deg, #00bfff, #0099ff);
+    border: none;
+    border-radius: 6px;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 10px;
+}
+
+.register-form button:hover {
+    background: linear-gradient(90deg, #0099ff, #00bfff);
+}
+
+.login-link {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.login-link a {
+    color: #00bfff;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+.register-form h1 {
+    font-size: 36px;
+    color: #00bfff;
+
+    margin-bottom: 5px;
+}
+
+.register-form .text {
+    font-size: 30px;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.logoss {
+    width: 225px;
+    height: auto;
+    margin-top: 325px;
+}
+.error {
+    color: #ff4d4f;
+    font-size: 1 rem;
+    font-weight: bold;
+    margin-top: 5px;
+    text-align: left;
+}

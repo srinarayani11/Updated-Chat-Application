@@ -1,0 +1,9 @@
+/* Optional: Add in Chat.css or global */
+.chat-box {
+  background-color: #f5f5f5;
+}
+
+.message {
+  word-wrap: break-word;
+  display: inline-block;
+}

@@ -3,9 +3,11 @@ import './Login.css';
 import Logo from '../assets/Logo.jpeg';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useAuth } from '../context/AuthContext';
 
 function Login() {
     const navigate = useNavigate();
+    const { login } = useAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
@@ -31,14 +33,23 @@ function Login() {
                 data
             );
 
-            console.log(response.data);
+            console.log("Login response:", response.data);
+
+            // Call AuthContext login
+            login(
+                {
+                    id: response.data.user.id,
+                    name: response.data.user.name,
+                    email: response.data.user.email
+                },
+                response.data.token
+            );
+
             setShowSuccessModal(true);
-            localStorage.setItem("token", response.data.token);
 
-        setTimeout(() => {
-         navigate("/chat", { state: { receiverId: 1 } }); // 👈 replace 2 with real user ID
-         }, 1000); // Optional: 1 second delay is better than 10 seconds
-
+            setTimeout(() => {
+                navigate("/chat", { state: { receiverId: 1 } });
+            }, 1000);
 
         } catch (error: any) {
             console.error(error);
@@ -49,6 +60,7 @@ function Login() {
                 setErrors({ password: "Login failed. Please try again." });
             }
         }
+
     };
 
     const [showSuccessModal, setShowSuccessModal] = useState(false);
@@ -69,7 +81,7 @@ function Login() {
                         value={email}
                         onChange={(e) => {
                             setEmail(e.target.value);
-                            setErrors({ ...errors, email: "" }); 
+                            setErrors({ ...errors, email: "" });
                         }}
                     />
                     {errors.email && <div className="error-text">{errors.email}</div>}

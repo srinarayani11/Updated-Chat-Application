@@ -1,7 +1,12 @@
 {
   "dependencies": {
     "axios": "^1.10.0",
+    "date-fns": "^4.1.0",
+    "emoji-mart": "^5.6.0",
+    "pusher-js": "^8.4.0",
     "react-router-dom": "^7.7.0",
+    "react-simple-keyboard": "^3.8.99",
+    "simple-keyboard": "^3.8.70",
     "socket.io-client": "^4.8.1"
   }
 }

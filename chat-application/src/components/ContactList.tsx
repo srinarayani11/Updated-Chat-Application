@@ -1,66 +1,102 @@
-// src/components/ContactList.tsx
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { fetchContacts } from '../api/contactApi';
+import { fetchContacts } from '../api/messageApi';
+import { useAuth } from '../context/AuthContext';
+import './ContactList.css';
 
 interface Contact {
   id: number;
   name: string;
+  email: string;
   profile_picture?: string;
   is_online?: boolean;
-  last_seen?: string;
+  last_message?: string;
 }
 
-const ContactList = () => {
+interface Props {
+  onSelectContact: (contact: Contact) => void;
+}
+
+const ContactList = ({ onSelectContact }: Props) => {
   const [contacts, setContacts] = useState<Contact[]>([]);
-  const navigate = useNavigate();
+  const [filteredContacts, setFilteredContacts] = useState<Contact[]>([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedId, setSelectedId] = useState<number | null>(null);
+  const { user } = useAuth();
 
   useEffect(() => {
     const loadContacts = async () => {
       try {
         const res = await fetchContacts();
-        setContacts(res.data);
+        const filtered = res.data.filter((c: Contact) => c.id !== user?.id);
+        setContacts(filtered);
+        setFilteredContacts(filtered);
       } catch (err) {
         console.error('Error fetching contacts:', err);
       }
     };
-
     loadContacts();
-  }, []);
+  }, [user]);
 
-  const handleClick = (id: number) => {
-    navigate('/chat', { state: { receiverId: id } });
+  const handleSelect = (contact: Contact) => {
+    setSelectedId(contact.id);
+    onSelectContact(contact);
+  };
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const query = e.target.value.toLowerCase();
+    setSearchQuery(query);
+
+    const filtered = contacts.filter(contact =>
+      contact.name.toLowerCase().includes(query)
+    );
+    setFilteredContacts(filtered);
   };
 
   return (
-    <div className="p-3 border-end bg-white" style={{ width: '250px' }}>
-      <h5>Contacts</h5>
-      {contacts.map((contact) => (
-        <div
-          key={contact.id}
-          onClick={() => handleClick(contact.id)}
-          className="d-flex align-items-center gap-2 py-2 px-2 mb-2 border rounded cursor-pointer bg-light"
-          style={{ cursor: 'pointer' }}
-        >
-          <img
-            src={contact.profile_picture || '/default-profile.png'}
-            alt={contact.name}
-            className="rounded-circle"
-            width={40}
-            height={40}
-          />
-          <div>
-            <div>{contact.name}</div>
-            <small className={`text-${contact.is_online ? 'success' : 'secondary'}`}>
-              {contact.is_online
-                ? 'Online'
-                : contact.last_seen
-                ? `Last seen ${new Date(contact.last_seen).toLocaleString()}`
-                : 'Offline'}
-            </small>
+    <div className="contact-list-container">
+      <input
+        type="text"
+        id="contact-search"
+        name="contact-search"
+        className="search-bar"
+        placeholder="Search"
+        value={searchQuery}
+        onChange={handleSearch}
+      />
+
+      <div className="contacts-wrapper">
+        {filteredContacts.map((contact) => (
+          <div
+            key={contact.id}
+            className={`contact-card ${selectedId === contact.id ? 'selected' : ''}`}
+            onClick={() => handleSelect(contact)}
+          >
+            {contact.profile_picture ? (
+              <img
+                src={contact.profile_picture}
+                alt={contact.name}
+                className="contact-avatar"
+                onError={(e) => {
+                  e.currentTarget.onerror = null;
+                  e.currentTarget.src = '/default-avatar.png'; // fallback image
+                }}
+              />
+            ) : (
+              <div className="contact-avatar placeholder">
+                {contact.name.charAt(0)}
+              </div>
+            )}
+
+            <div className="contact-meta">
+              <div className="name">{contact.name}</div>
+              <div className="last-message">
+                {contact.last_message || 'Start chatting...'}
+              </div>
+            </div>
+            <div className="time">09:00</div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };

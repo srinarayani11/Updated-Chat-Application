@@ -1,0 +1,145 @@
+.contact-list-container {
+  padding: 1rem;
+  height: 100vh;
+  width: 300px;
+  box-sizing: border-box;
+  background-color: #061333;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 🔍 Search bar */
+.search-bar {
+  width: 100%;
+  padding: 0.7rem 1.2rem;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.08);
+  border: none;
+  color: white;
+  font-size: 0.95rem;
+  margin-bottom: 1.2rem;
+}
+
+input.search-bar {
+  color: white;
+}
+
+.search-bar::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.search-bar:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #007aff;
+}
+
+/* 💬 Card Container Box */
+.contacts-wrapper {
+  flex: 1;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 10px 0;
+  overflow-y: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(6px);
+}
+
+/* 🟦 Contact Card */
+.contact-card {
+  display: flex;
+  align-items: center;
+  padding: 0.8rem 1rem;
+  margin: 6px 12px;
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.07);
+  cursor: pointer;
+  transition: background 0.25s ease;
+  gap: 1rem;
+  position: relative;
+  color: white;
+}
+
+.contact-card:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* 🎯 Selected Contact */
+.contact-card.selected {
+  background-color: rgba(0, 122, 255, 0.25);
+  border: 1px solid #007aff;
+}
+
+/* 🧑 Avatar */
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* 📝 Contact Details */
+.contact-meta {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.name {
+  font-weight: 600;
+  font-size: 1rem;
+  color: white;
+}
+
+.last-message {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.contact-card.selected .name {
+  color: white;
+  font-weight: 700;
+}
+
+.contact-card.selected .last-message {
+  color: #e0e0e0;
+}
+
+/* 🕒 Time */
+.time {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* 🔔 Unread Badge */
+.unread-badge {
+  background-color: orange;
+  color: white;
+  border-radius: 50%;
+  padding: 3px 8px;
+  font-size: 0.7rem;
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+}
+.contact-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #007aff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: white;
+  font-size: 1.1rem;
+}
+
+.contact-avatar.placeholder {
+  background-color: #14266e;
+}

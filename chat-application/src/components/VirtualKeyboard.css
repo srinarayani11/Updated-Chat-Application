@@ -1,0 +1,35 @@
+.virtual-keyboard {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #061333; /* dark panel */
+  padding: 12px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 122, 255, 0.15);
+}
+
+.hg-theme-default {
+  background: #0b1c47;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.hg-button {
+  background: #061333 !important;;
+  color: #ffffff !important;
+  border-radius: 8px;
+  font-size: 1.15rem;
+  font-weight: 600;
+ 
+  transition: all 0.2s ease-in-out;
+}
+
+.hg-button:hover {
+  background: #007aff;
+  color: #061333;
+}
+
+.hg-button:active {
+  transform: scale(0.95);
+  background: #005fd1;
+}

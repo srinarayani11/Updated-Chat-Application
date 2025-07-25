@@ -159,3 +159,8 @@
   margin-top: 4px;
   margin-bottom: 8px;
 }
+
+form.login-form{
+  display: flex;
+  flex-direction: column;
+}
